@@ -14,15 +14,29 @@ export class ListaDeseosProvider {
   listas:Lista[] = [];
 
   constructor() {
-    let lista1 = new Lista('compras supermecado');
-    let lista2 = new Lista('juegos que deseo');
-    let lista3 = new Lista('cosas de la universidad');
+    this.cargarData();
 
-    this.listas.push(lista1);
-    this.listas.push(lista2);
-    this.listas.push(lista3);
+  }
 
-    console.log('Hello ListaDeseosProvider Provider');
+  actualizarData(){
+    localStorage.setItem("data",JSON.stringify(this.listas));
+  }
+
+  cargarData(){
+    if(localStorage.getItem("data")){
+      this.listas = JSON.parse(localStorage.getItem("data"));
+    }
+
+  }
+
+  agregarData(lista:Lista){
+    this.listas.push(lista);
+    this.actualizarData();
+  }
+
+  eliminarData(idx:number){
+    this.listas.splice(idx,1);
+    this.actualizarData();
   }
 
 }

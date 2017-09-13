@@ -1,0 +1,75 @@
+<!--
+  Generated template for the AgregarPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>{{nomLista | placeholder:'Nueva Lista'}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-card>
+
+    <ion-card-header>
+      <ion-item>
+        <ion-label floating>Nombre Lista</ion-label>
+        <ion-input type="text" [(ngModel)]="nomLista" named="nomLista"></ion-input>
+      </ion-item>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label floating>Item:</ion-label>
+        <ion-input (keyup.enter)="agregarItem()"
+        type="text" [(ngModel)]="nomItem" named="nomItem"></ion-input>
+      </ion-item>
+
+      <button ion-button full
+              (click)="agregarItem()">
+              Agregar
+      </button>
+
+    </ion-card-content>
+
+  </ion-card>
+
+  <!--Items-->
+  <ion-card *ngIf="items.length > 0">
+    <ion-card-header>
+      <h3>Items Agregados</h3>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let item of items;let i = index">
+          <button ion-button color="dark" clear>
+            {{item.nombre}}
+          </button>
+
+          <button ion-button outline item-right color="danger" (click)="eliminarItem(i)">
+            <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+
+          </button>
+
+        </ion-item>
+
+      </ion-list>
+
+    </ion-card-content>
+
+  </ion-card>
+
+  <button ion-button full icon-left (click)="agregarLista()">
+    <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+    Agregar Lista
+  </button>
+
+
+</ion-content>
